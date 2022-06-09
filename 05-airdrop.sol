@@ -44,13 +44,14 @@ contract Airdrop  {
 
     function subscribe() public returns(bool) {
         require(hasSubscribed(msg.sender), "ja cadastrado");
+         subscribers.push(msg.sender);
+    
         return true;
     }
 
-    function ver() public view returns(address){
-        msg.sender;
+    function getSubscribes() public view returns(address[] memory){
+        return subscribers;
     }
-
 
     function execute() public isOwner returns(bool) {
 
@@ -70,11 +71,10 @@ contract Airdrop  {
 
 
     // Private Functions
-    function hasSubscribed(address subscriber) private returns(bool) {
+    function hasSubscribed(address subscriber) view private returns(bool)  {
         //TODO: Need Implementation
         for(uint i = 0; i < subscribers.length; i++){
             require(subscribers[i] != subscriber);
-            subscribers.push(subscriber);
         }
         return true;
     }
@@ -82,7 +82,8 @@ contract Airdrop  {
     // Kill
     function kill() public isOwner {
         //TODO: Need Implementation
+        selfdestruct(payable(owner));
+
     }
-    
     
 }

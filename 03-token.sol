@@ -59,8 +59,4 @@ contract CryptoToken is IERC20 {
         emit Transfer(msg.sender, receiver, quantity);
         return true;
     }
-
-
-
-
 }
